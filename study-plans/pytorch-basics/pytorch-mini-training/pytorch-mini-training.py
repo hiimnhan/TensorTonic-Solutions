@@ -9,10 +9,10 @@ def train_epoch(model, dataloader, criterion, optimizer):
     total_loss = 0.0
     num_batches = 0
 
-    for inputs, targets in dataloader:
+    for inputs, targets  in dataloader:
         optimizer.zero_grad()
-        outputs = model(inputs)
-        loss = criterion(outputs, targets)
+        logits = model(inputs)
+        loss = criterion(logits, targets)
         loss.backward()
         optimizer.step()
 
