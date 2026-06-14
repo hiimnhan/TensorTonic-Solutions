@@ -5,4 +5,4 @@ def scale_cols(data, weights):
     d = np.array(data, dtype=np.float64)
     w = np.array(weights, dtype=np.float64)
 
-    return d * w.reshape(-1)
+    return d * w
