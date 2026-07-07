@@ -13,3 +13,4 @@ def embed_tokens(embedding: nn.Embedding, tokens: torch.Tensor, d_model: int) ->
     Convert token indices to scaled embeddings.
     """
     return embedding(tokens) * math.sqrt(d_model)
+    
