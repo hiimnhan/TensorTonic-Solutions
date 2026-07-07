@@ -23,33 +23,45 @@ class SimpleTokenizer:
         Add special tokens first, then unique words.
         """
         special_tokens = [self.pad_token, self.unk_token, self.bos_token, self.eos_token]
-        for i, token in enumerate(special_tokens):
-            self.word_to_id[token] = i
-            self.id_to_word[i] = token
 
-        unique_words = set()
+        for i, t in enumerate(special_tokens):
+            self.word_to_id[t] = i
+            self.id_to_word[i] = t
+
+        unique_tokens = set()
+
         for text in texts:
-            words = text.lower().split()
-            unique_words.update(words)
+            text = text.lower().split()
+            unique_tokens.update(text)
 
-        for word in sorted(unique_words):
+        for token in sorted(unique_tokens):
             idx = len(self.word_to_id)
-            self.word_to_id[word] = idx
-            self.id_to_word[idx] = word
+            self.word_to_id[token] = idx
+            self.id_to_word[idx] = token
 
         self.vocab_size = len(self.word_to_id)
-    
+                    
+        
     def encode(self, text: str) -> List[int]:
         """
         Convert text to list of token IDs.
         Use UNK for unknown words.
         """
-        words = text.lower().split()
-        unk_id = self.word_to_id[self.unk_token]
-        return [self.word_to_id.get(word, unk_id) for word in words]
+        out = []
+
+        for t in text.lower().split():
+            unk_id = self.word_to_id.get(self.unk_token)
+            out.append(self.word_to_id.get(t, unk_id))
+
+        return out
     
     def decode(self, ids: List[int]) -> str:
         """
         Convert list of token IDs back to text.
         """
-        return " ".join([self.id_to_word.get(id, self.unk_token) for id in ids])
+        out = []
+
+        for id in ids:
+            out.append(self.id_to_word.get(id, self.unk_token))
+
+        return " ".join(out)
