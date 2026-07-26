@@ -9,25 +9,24 @@ def gru_cell(x_t: np.ndarray, h_prev: np.ndarray,
     """
     Complete GRU cell forward pass.
     """
-    def reset_gate(x_t, h_prev, W_r, b_r):
-        concat = np.concatenate([h_prev, x_t], axis=-1)
-        return sigmoid(concat @ W_r.T + b_r)
+    # reset gate: determine how much of prev hidden state to forget
+    # r_ approx 0 -> erased
+    h_x = np.concat([h_prev, x_t], axis=-1)
+    r_t = sigmoid(h_x @ W_r.T + b_r)
 
-    def update_gate(x_t, h_prev, W_z, b_z):
-        concat = np.concatenate([h_prev, x_t], axis=-1)
-        return sigmoid(concat @ W_z.T + b_z)
+    # update gate: control how much of old hidden state to carry forward 
+    # instead of replacing with new content
+    # z_t approx 0 -> replace entirely with the candidate
+    # z_t approx 1 -> copy the old hidden state
+    z_t = sigmoid(h_x @ W_z.T + b_z)
 
-    def candidate_gate(x_t, h_prev, r_t, W_h, b_h):
-        gated_h = r_t * h_prev
-        concat = np.concatenate([gated_h, x_t], axis=-1)
-        return np.tanh(concat @ W_h.T + b_h)
+    # candidate hidden state: propose new content
+    # let prev hidden state + input go thru reset gate -> create a new version of prev state
+    gated_r = r_t * h_prev
+    concat_h = np.concat([gated_r, x_t], axis=-1)
+    h_tilde = np.tanh(concat_h @ W_h.T + b_h)
 
-    def hidden_state(z_t, h_prev, h_tilde):
-        return (z_t * h_prev) + (1 - z_t) * h_tilde
-
-    r_t = reset_gate(x_t, h_prev, W_r, b_r)
-    z_t = update_gate(x_t, h_prev, W_z, b_z)
-    h_tilde = candidate_gate(x_t, h_prev, r_t, W_h, b_h)
-    h_t = hidden_state(z_t, h_prev, h_tilde)
+    # new hidden state
+    h_t = z_t * h_prev + (1 - z_t) * h_tilde
 
     return h_t
