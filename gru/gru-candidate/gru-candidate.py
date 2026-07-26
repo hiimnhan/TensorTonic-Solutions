@@ -5,9 +5,7 @@ def candidate_hidden(h_prev: np.ndarray, x_t: np.ndarray, r_t: np.ndarray,
     """
     Compute candidate: h_tilde = tanh(W_h @ [r*h, x] + b_h)
     """
-    gated_h = r_t * h_prev
-    concat = np.concatenate([gated_h, x_t], axis=-1)
-    h_tilde = np.tanh(concat @ W_h.T + b_h)
+    info_retain = r_t * h_prev
+    concat = np.concat([info_retain, x_t], axis=-1)
 
-    return h_tilde
-    
+    return np.tanh(concat @ W_h.T + b_h)
