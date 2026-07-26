@@ -8,5 +8,5 @@ def update_gate(h_prev: np.ndarray, x_t: np.ndarray,
     """
     Compute update gate: z_t = sigmoid(W_z @ [h, x] + b_z)
     """
-    concat = np.concatenate([h_prev, x_t], axis=-1)
+    concat = np.concat([h_prev, x_t], axis=-1)
     return sigmoid(concat @ W_z.T + b_z)
