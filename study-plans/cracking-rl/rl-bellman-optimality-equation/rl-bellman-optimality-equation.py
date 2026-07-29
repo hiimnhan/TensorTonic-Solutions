@@ -7,13 +7,13 @@ def bellman_optimality_backup(P, R, gamma, V):
     V_new = [0.0] * S
 
     for s in range(S):
-        best = float("-inf")
+        mx = float("-inf")
+
         for a in range(A):
             q = 0.0
             for sp in range(S):
                 q += P[s][a][sp] * (R[s][a][sp] + gamma * V[sp])
-            if q > best:
-                best = q
-        V_new[s] = round(best, 4)
+            mx = max(mx, q)
+        V_new[s] = round(mx, 4)
 
     return V_new
