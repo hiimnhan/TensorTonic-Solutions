@@ -5,14 +5,6 @@ def encode_go_history(history, to_play):
     Returns: a floating 17-plane current-player-relative history tensor.
     """
     device = history[0].device
-    BOARD_SIZE = 17
-import torch
-
-def encode_go_history(history, to_play):
-    """
-    Returns: a floating 17-plane current-player-relative history tensor.
-    """
-    device = history[0].device
     size = history[0].shape[0]
     planes = []
 
