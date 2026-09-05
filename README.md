@@ -73,9 +73,9 @@ Verified machine learning implementations completed on [TensorTonic](https://www
 | Hidden State Update | Implement the GRU hidden-state interpolation between the previous state and candidate using the update gate. | https://www.tensortonic.com/research/gru/gru-hidden-update |
 | Reset Gate | Implement a GRU reset gate that controls how much of the previous hidden state contributes to the candidate state. | https://www.tensortonic.com/research/gru/gru-reset-gate |
 | Update Gate | Implement a GRU update gate that balances retained hidden memory against the new candidate representation. | https://www.tensortonic.com/research/gru/gru-update-gate |
-| RMSNorm | Implement Llama RMSNorm by scaling hidden states with their root-mean-square magnitude and learned weights. | https://www.tensortonic.com/research/llama/llama-rmsnorm |
-| Rotary Positional Embeddings (RoPE) | Apply Llama rotary positional embeddings to query and key tensors by rotating paired feature dimensions. | https://www.tensortonic.com/research/llama/llama-rope |
-| RoPE Frequency Table | Build the Llama RoPE frequency table from token positions, head dimensions, and the rotary base. | https://www.tensortonic.com/research/llama/llama-rope-freqs |
+| Root Mean Square Normalization | Implement Llama RMSNorm by scaling hidden states with their root-mean-square magnitude and learned weights. | https://www.tensortonic.com/research/llama/llama-rmsnorm |
+| Apply Rotary Position Embeddings | Apply Llama rotary positional embeddings to query and key tensors by rotating paired feature dimensions. | https://www.tensortonic.com/research/llama/llama-rope |
+| Precompute RoPE Frequencies | Build the Llama RoPE frequency table from token positions, head dimensions, and the rotary base. | https://www.tensortonic.com/research/llama/llama-rope-freqs |
 | Scaled Dot-Product Attention | Implement scaled dot-product attention in PyTorch using query-key scores, softmax weights, and value aggregation. | https://www.tensortonic.com/research/transformer/transformers-attention |
 | Embedding Layer | Create PyTorch token embeddings and scale each lookup by the square root of the Transformer model dimension. | https://www.tensortonic.com/research/transformer/transformers-embedding |
 | Encoder Block | Assemble a Transformer encoder block with multi-head attention, residual paths, layer normalization, and a feed-forward network. | https://www.tensortonic.com/research/transformer/transformers-encoder-block |
@@ -93,6 +93,7 @@ Verified machine learning implementations completed on [TensorTonic](https://www
 | Encode AlphaGo Zero Board History | Encode the current board and up to seven earlier boards from the current player's perspective. | https://www.tensortonic.com/study-plans/alphago-from-scratch/alphago-l02-encode-board-history |
 | Dropout | Apply inverted dropout from a supplied binary mask during training and preserve the input unchanged during evaluation. | https://www.tensortonic.com/study-plans/cracking-dl/dl-dropout |
 | Multi-Layer Perceptron (Forward Pass) | Implement the forward pass of a multi-layer perceptron (MLP) with arbitrary depth and width. | https://www.tensortonic.com/study-plans/cracking-dl/dl-forward-pass |
+| Layer Normalization | Implement Layer Normalization (Ba et al, 2016), the standard normalization technique in Transformers. | https://www.tensortonic.com/study-plans/cracking-dl/dl-layer-normalization |
 | Loss Functions | Implement MSE, binary cross-entropy, categorical cross-entropy, and Huber losses from supplied predictions and targets. | https://www.tensortonic.com/study-plans/cracking-dl/dl-loss-functions |
 | Mini-Batch Training Loop | Train a NumPy multilayer perceptron over ordered mini-batches with forward passes, backpropagation, and SGD updates. | https://www.tensortonic.com/study-plans/cracking-dl/dl-mini-batch-training |
 | Perceptron | Train a binary perceptron from zero-initialized weights using ordered samples, step predictions, and error-correction updates. | https://www.tensortonic.com/study-plans/cracking-dl/dl-perceptron |
