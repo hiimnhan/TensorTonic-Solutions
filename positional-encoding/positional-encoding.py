@@ -1,18 +1,16 @@
 import numpy as np
 
-def positional_encoding(seq_len, d_model, base=10000.0):
+def positional_encoding(seq_len: int, d_model: int, base: float = 10000.0) -> np.ndarray:
     """
-    Return PE of shape (seq_len, d_model) using sin/cos formulation.
-    Odd d_model -> last column is sin.
+    Returns a NumPy array of shape (seq_len, d_model).
     """
-    T, d = int(seq_len), int(d_model)
-    pos = np.arange(T, dtype=float).reshape((T, 1))
-    i = np.arange((d + 1) // 2, dtype=float).reshape((1, (d + 1) // 2))
-    div = np.power(base, (2 * i) / d)
-    angles = pos / div
-    pe = np.zeros((T, d), dtype=float)
-    pe[:, 0::2] = np.sin(angles[:, :(d + 1) // 2])[:, :len(pe[0, 0::2])]
-    pe[:, 1::2] = np.cos(angles[:, :(d + 1) // 2])[:, :len(pe[0, 1::2])]
-
+    pe = np.zeros((seq_len, d_model))
+    position = np.arange(seq_len)[:, np.newaxis]
+    
+    # Compute the divisors only for the even indices (0, 2, 4...)
+    div_term = np.exp(np.arange(0, d_model, 2) * -(np.log(base) / d_model))
+    
+    # Assign sine to even indices and cosine to odd indices
+    pe[:, 0::2] = np.sin(position * div_term)
+    pe[:, 1::2] = np.cos(position * div_term[:d_model // 2]) # Handles odd/even safety
     return pe
-        
